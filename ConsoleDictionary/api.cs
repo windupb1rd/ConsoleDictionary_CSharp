@@ -11,25 +11,28 @@ namespace ConsoleDictionary
 {
     public class FreeDictionaryAPI
     {
-        public class JSONModelCollection
-        {
-            public List<JSONModel> Jsonmodel { get; set; }
-        }
-        public class JSONModel
+        public class Definition
         {   
-            public string word;
-            public string phonetic;
+            public string word { get; set; }
+            public string phonetic { get; set; }
+            public List<Phonetics> phonetics { get; set; }
         }
+        public class Phonetics
+        {
+            public string text { get; set; }
+            public string audio { get; set; }
+        }
+
         public static object GetWordsInJson(string query)
         {
             WebClient client = new();
+            client.Encoding = Encoding.UTF8;
             string replyFromApi = client.DownloadString("https://api.dictionaryapi.dev/api/v2/entries/en/" + query);
 
-            //var listOfDefinitions = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(replyFromApi);
-            //string entry1 = JsonConvert.SerializeObject(listOfDefinitions[1]);
+            var final = JsonConvert.DeserializeObject<List<Definition>>(replyFromApi);
 
-            var final = JsonConvert.DeserializeObject<JSONModelCollection>(replyFromApi);
-
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.WriteLine(final[0].phonetic);
             return final;
         }
 
