@@ -9,6 +9,18 @@ using Newtonsoft.Json;
 
 namespace ConsoleDictionary
 {
+    public class GetWord
+    {
+        public static string GetJson(string query)
+        {
+            WebClient client = new()
+            {
+                Encoding = Encoding.UTF8
+            };
+            
+            return client.DownloadString(query);
+        }
+    }
     public class FreeDictionaryAPI
     {
         public class Definition
@@ -22,18 +34,13 @@ namespace ConsoleDictionary
             public string text { get; set; }
             public string audio { get; set; }
         }
-
-        public static object GetWordsInJson(string query)
+        public static List<Definition> GetWordObject(string query)
         {
-            WebClient client = new();
-            client.Encoding = Encoding.UTF8;
-            string replyFromApi = client.DownloadString("https://api.dictionaryapi.dev/api/v2/entries/en/" + query);
+            string URL = "https://api.dictionaryapi.dev/api/v2/entries/en/" + query;
+            string replyFromApi = GetWord.GetJson(URL);
+            var wordObject = JsonConvert.DeserializeObject<List<Definition>>(replyFromApi);
 
-            var final = JsonConvert.DeserializeObject<List<Definition>>(replyFromApi);
-
-            Console.OutputEncoding = Encoding.UTF8;
-            Console.WriteLine(final[0].phonetic);
-            return final;
+            return wordObject;
         }
 
     }

@@ -11,9 +11,10 @@ namespace ConsoleDictionary
     {
         static void Main(string[] args)
         {
-            object searchQuery = FreeDictionaryAPI.GetWordsInJson(Console.ReadLine());
-            Console.WriteLine(searchQuery);
+            dynamic searchResult = FreeDictionaryAPI.GetWordObject(Console.ReadLine());
 
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.WriteLine(searchResult[0].phonetic);
             Console.ReadLine();
         }
     }
