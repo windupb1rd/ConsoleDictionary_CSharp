@@ -23,22 +23,35 @@ namespace ConsoleDictionary
     }
     public class FreeDictionaryAPI
     {
-        public class Definition
+        public class WordObject
         {   
-            public string word { get; set; }
-            public string phonetic { get; set; }
-            public List<Phonetics> phonetics { get; set; }
+            public string Word { get; set; }
+            public string Phonetic { get; set; }
+            public List<Phonetics> Phonetics { get; set; }
+            public List<Meanings> Meanings { get; set; }
+
         }
         public class Phonetics
         {
-            public string text { get; set; }
-            public string audio { get; set; }
+            public string Text { get; set; }
+            public string Audio { get; set; }
         }
-        public static List<Definition> GetWordObject(string query)
+        public class Meanings
+        {
+            public string PartOfSpeech { get; set; }
+            public string[] Synonyms { get; set; }
+            public List<Definitions> Definitions { get; set; }
+        }
+        public class Definitions
+        {
+            public string Definition { get; set; }
+            public string Example { get; set; }
+        }
+        public static List<FreeDictionaryAPI.WordObject> GetWordObject(string query)
         {
             string URL = "https://api.dictionaryapi.dev/api/v2/entries/en/" + query;
             string replyFromApi = GetWord.GetJson(URL);
-            var wordObject = JsonConvert.DeserializeObject<List<Definition>>(replyFromApi);
+            var wordObject = JsonConvert.DeserializeObject<List<WordObject>>(replyFromApi);
 
             return wordObject;
         }
