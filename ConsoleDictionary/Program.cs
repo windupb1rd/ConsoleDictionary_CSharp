@@ -11,13 +11,30 @@ namespace ConsoleDictionary
     {
         static void Main(string[] args)
         {
-            List<FreeDictionaryAPI.WordObject> searchResult = FreeDictionaryAPI.GetWordObject(args[0]);
+            WordCard wordCard = WordCard.FormWordCard(args[0]);
 
             Console.OutputEncoding = Encoding.UTF8;
-            Console.WriteLine($"{searchResult[0].Word}   {searchResult[0].Phonetics[0].Text}\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{wordCard.Word}   {wordCard.Pronunciation}\n--------------------");
+            Console.ForegroundColor = ConsoleColor.White;
 
-            //Console.WriteLine($"1. {searchResult[0].Meanings[0].Definitions[0].Definition}"+
-            //                  $"2. {searchResult[0].Meanings[0].Definitions[1].Definition}\n");
+            foreach (var item in wordCard.Definitions)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                
+                Console.WriteLine(item.Key.ToUpper());
+                Console.WriteLine("--------------------");
+                Console.ForegroundColor = ConsoleColor.White;
+                int maxDefinitions = 5;
+                for (int i = 0; i < item.Value.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {item.Value[i]}");
+                    if (i == maxDefinitions - 1)
+                    {
+                        break;
+                    }
+                }
+            }
 
             Console.ReadLine();
         }

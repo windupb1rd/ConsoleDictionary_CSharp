@@ -52,7 +52,7 @@ namespace ConsoleDictionary
             string URL = "https://api.dictionaryapi.dev/api/v2/entries/en/" + query;
             string replyFromApi = GetWord.GetJson(URL);
             var wordObject = JsonConvert.DeserializeObject<List<WordObject>>(replyFromApi);
-
+            
             return wordObject;
         }
 

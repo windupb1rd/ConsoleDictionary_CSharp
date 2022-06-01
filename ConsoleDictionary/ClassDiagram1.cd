@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ConsoleDictionary.GetWord">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>APIs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleDictionary.FreeDictionaryAPI">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="ConsoleDictionary.FreeDictionaryAPI.WordObject" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>APIs.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="ConsoleDictionary.FreeDictionaryAPI.Phonetics" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>APIs.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="ConsoleDictionary.FreeDictionaryAPI.Meanings" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>APIs.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="ConsoleDictionary.FreeDictionaryAPI.Definitions">
+        <TypeIdentifier>
+          <NewMemberFileName>APIs.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>APIs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleDictionary.Program">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleDictionary.WordCard">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAACAAAAAAAQEAAABAAAAAAAQAAAAAA=</HashCode>
+      <FileName>WordCard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9.16" />
+</ClassDiagram>
