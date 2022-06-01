@@ -9,9 +9,9 @@ namespace ConsoleDictionary
 {
     internal class Program
     {
-        static void Main(string[] args)
+        internal static void SearchAndPrint(string searchQuery)
         {
-            WordCard wordCard = WordCard.FormWordCard(Console.ReadLine());
+            WordCard wordCard = WordCard.FormWordCard(searchQuery);
 
             Console.OutputEncoding = Encoding.UTF8;
             Console.ForegroundColor = ConsoleColor.Green;
@@ -21,7 +21,7 @@ namespace ConsoleDictionary
             foreach (var item in wordCard.Definitions)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                
+
                 Console.WriteLine(item.Key.ToUpper());
                 Console.WriteLine("--------------------");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -35,8 +35,24 @@ namespace ConsoleDictionary
                     }
                 }
             }
+            Console.WriteLine("----------------------------------------------------------------------------");
+        }
+        static void Main(string[] args)
+        {
+            bool runProgram = true;
+            do
+            {
+                Console.Write("Enter a word: ");
+                string searchQuery = Console.ReadLine();
+                if (searchQuery == "EXIT")
+                {
+                    runProgram = false;
+                }
 
-            Console.ReadLine();
+                SearchAndPrint(searchQuery);
+                
+            } while (runProgram);
+            
         }
     }
 }
