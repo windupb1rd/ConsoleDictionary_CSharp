@@ -11,7 +11,7 @@ namespace ConsoleDictionary
     {
         static void Main(string[] args)
         {
-            WordCard wordCard = WordCard.FormWordCard(args[0]);
+            WordCard wordCard = WordCard.FormWordCard(Console.ReadLine());
 
             Console.OutputEncoding = Encoding.UTF8;
             Console.ForegroundColor = ConsoleColor.Green;

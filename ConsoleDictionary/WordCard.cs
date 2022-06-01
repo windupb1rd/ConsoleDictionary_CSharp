@@ -36,7 +36,11 @@ namespace ConsoleDictionary
             for (int i = 0; i < freeDictApiWordObj[0].Meanings.Count; i++)
             {
                 string partOfSpeech = freeDictApiWordObj[0].Meanings[i].PartOfSpeech;
-                wordCard.Definitions.Add(partOfSpeech, new List<string>());
+                if (!wordCard.Definitions.ContainsKey(partOfSpeech))
+                    {
+                    wordCard.Definitions.Add(partOfSpeech, new List<string>());
+                }
+                
                 for (int j = 0; j < freeDictApiWordObj[0].Meanings[i].Definitions.Count; j++)
                     wordCard.Definitions[partOfSpeech].Add($"{freeDictApiWordObj[0].Meanings[i].Definitions[j].Definition}\n     /{freeDictApiWordObj[0].Meanings[i].Definitions[j].Example?? "No example"}/ ");
             }
