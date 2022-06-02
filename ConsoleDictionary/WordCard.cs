@@ -10,8 +10,8 @@ namespace ConsoleDictionary
         internal Dictionary<string, List<string>> Definitions = new Dictionary<string, List<string>>();
 
         internal Dictionary<string, List<string>> Synonyms = new Dictionary<string, List<string>>();
-        internal string[] Translations { get; set; }  // доделать
-        internal string[] ReversoExamples { get; set; }  // доделать
+        //internal string[] Translations { get; set; }  // доделать
+        //internal string[] ReversoExamples { get; set; }  // доделать
 
         /// <summary>
         /// Метод формирует единую объект слова на основе данных из разных API
