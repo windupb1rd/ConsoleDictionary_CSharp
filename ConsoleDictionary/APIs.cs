@@ -17,8 +17,19 @@ namespace ConsoleDictionary
             {
                 Encoding = Encoding.UTF8
             };
-            
-            return client.DownloadString(query);
+
+            try
+            {
+                string response = client.DownloadString(query);
+                return response;
+            }
+            catch (WebException)
+            {
+                Console.WriteLine("I couldn't find the word. Check you query for typos or try looking for another word.");
+                Program.Main();
+
+                return null;
+            }
         }
     }
     public class FreeDictionaryAPI
@@ -39,7 +50,7 @@ namespace ConsoleDictionary
         public class Meanings
         {
             public string PartOfSpeech { get; set; }
-            public string[] Synonyms { get; set; }
+            public List<string> Synonyms { get; set; }
             public List<Definitions> Definitions { get; set; }
         }
         public class Definitions
@@ -52,7 +63,7 @@ namespace ConsoleDictionary
             string URL = "https://api.dictionaryapi.dev/api/v2/entries/en/" + query;
             string replyFromApi = GetWord.GetJson(URL);
             var wordObject = JsonConvert.DeserializeObject<List<WordObject>>(replyFromApi);
-            
+
             return wordObject;
         }
 

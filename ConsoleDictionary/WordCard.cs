@@ -2,14 +2,16 @@
 
 namespace ConsoleDictionary
 {
-    public class WordCard
+    internal class WordCard
     {
-        public string Word { get; set; }
-        public string Pronunciation { get; set; }
+        internal string Word { get; set; }
+        internal string Pronunciation { get; set; }
 
-        public Dictionary<string, List<string>> Definitions = new Dictionary<string, List<string>>();
-        public string[] Translations { get; set; }  // доделать
-        public string[] ReversoExamples { get; set; }  // доделать
+        internal Dictionary<string, List<string>> Definitions = new Dictionary<string, List<string>>();
+
+        internal Dictionary<string, List<string>> Synonyms = new Dictionary<string, List<string>>();
+        internal string[] Translations { get; set; }  // доделать
+        internal string[] ReversoExamples { get; set; }  // доделать
 
         /// <summary>
         /// Метод формирует единую объект слова на основе данных из разных API
@@ -36,13 +38,29 @@ namespace ConsoleDictionary
             for (int i = 0; i < freeDictApiWordObj[0].Meanings.Count; i++)
             {
                 string partOfSpeech = freeDictApiWordObj[0].Meanings[i].PartOfSpeech;
+
+                // Add synonym per part of speech
+                if (!wordCard.Definitions.ContainsKey(partOfSpeech))
+                {
+                    wordCard.Synonyms.Add(partOfSpeech, freeDictApiWordObj[0].Meanings[i].Synonyms);
+                }
+                else
+                {
+                    wordCard.Synonyms[partOfSpeech].AddRange(freeDictApiWordObj[0].Meanings[i].Synonyms);
+                }
+
+                // Add defenitions per part of speech
                 if (!wordCard.Definitions.ContainsKey(partOfSpeech))
                     {
                     wordCard.Definitions.Add(partOfSpeech, new List<string>());
                 }
-                
                 for (int j = 0; j < freeDictApiWordObj[0].Meanings[i].Definitions.Count; j++)
-                    wordCard.Definitions[partOfSpeech].Add($"{freeDictApiWordObj[0].Meanings[i].Definitions[j].Definition}\n     /{freeDictApiWordObj[0].Meanings[i].Definitions[j].Example?? "No example"}/ ");
+                {
+                    wordCard.Definitions[partOfSpeech]
+                            .Add($"{freeDictApiWordObj[0]
+                                .Meanings[i].Definitions[j].Definition}\n\t/{freeDictApiWordObj[0]
+                                .Meanings[i].Definitions[j].Example ?? "No example"}/ ");
+                }
             }
 
             return wordCard;

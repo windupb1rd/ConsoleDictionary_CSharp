@@ -18,17 +18,28 @@ namespace ConsoleDictionary
             Console.WriteLine($"{wordCard.Word}   {wordCard.Pronunciation}\n--------------------");
             Console.ForegroundColor = ConsoleColor.White;
 
-            foreach (var item in wordCard.Definitions)
+            foreach (var partOfSpeech in wordCard.Definitions)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
 
-                Console.WriteLine(item.Key.ToUpper());
+                Console.Write($"{partOfSpeech.Key.ToUpper()}\t");
+
+                int maxSynonyms = 5;
+                for (int i = 0; i < wordCard.Synonyms[partOfSpeech.Key].Count; i++)
+                {
+                    Console.Write($"| {wordCard.Synonyms[partOfSpeech.Key][i]} |");
+                    if (i == maxSynonyms - 1)
+                    {
+                        break;
+                    }
+                }
+                Console.WriteLine();
                 Console.WriteLine("--------------------");
                 Console.ForegroundColor = ConsoleColor.White;
                 int maxDefinitions = 5;
-                for (int i = 0; i < item.Value.Count; i++)
+                for (int i = 0; i < partOfSpeech.Value.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {item.Value[i]}");
+                    Console.WriteLine($"{i + 1}. {partOfSpeech.Value[i]}");
                     if (i == maxDefinitions - 1)
                     {
                         break;
@@ -37,7 +48,7 @@ namespace ConsoleDictionary
             }
             Console.WriteLine("----------------------------------------------------------------------------");
         }
-        static void Main(string[] args)
+        internal static void Main()
         {
             bool runProgram = true;
             do
