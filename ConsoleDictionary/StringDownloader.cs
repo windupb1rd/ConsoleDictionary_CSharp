@@ -11,25 +11,10 @@ namespace ConsoleDictionary
 {
     public class StringDownloader
     {
-        public string GetString(string url)
+        internal string GetString(string url)
         {
-            WebClient client = new()
-            {
-                Encoding = Encoding.UTF8
-            };
-
-            try
-            {
-                string response = client.DownloadString(url);
-                return response;
-            }
-            catch (WebException)
-            {
-                Console.WriteLine("I couldn't find the word. Check you query for typos or try looking for another word.");
-                Program.Main();
-
-                return null;
-            }
+            var webClient = DI.DIContainer.instance.Release<IWebClient>();
+            return webClient.DownloadString(url);
         }
     }
 }

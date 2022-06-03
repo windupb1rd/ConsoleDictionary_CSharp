@@ -50,7 +50,10 @@
   <ItemGroup>
     <Compile Include="DI\DIContainer.cs" />
     <Compile Include="FreeDict\WordCardFreeApi.cs" />
+    <Compile Include="IWebClient.cs" />
     <Compile Include="IWordCardProvider.cs" />
+    <Compile Include="MyHttpClient.cs" />
+    <Compile Include="MyWebClient.cs" />
     <Compile Include="SomeDict\SomeDictApi.cs" />
     <Compile Include="StringDownloader.cs" />
     <Compile Include="FreeDict\FreeDictApi.cs" />

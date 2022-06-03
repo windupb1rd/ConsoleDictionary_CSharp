@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleDictionary.DI
 {
-    internal class DIContainer
+    public class DIContainer
     {
+        public readonly static DIContainer instance = new DIContainer();
+
         private readonly Dictionary<Type, object> _container = new Dictionary<Type, object>();
 
         public void Register(Type type, object value)

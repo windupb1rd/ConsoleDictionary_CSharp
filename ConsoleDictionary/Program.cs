@@ -12,7 +12,7 @@ namespace ConsoleDictionary
     {
         internal static void Main()
         {
-            DI.DIContainer di = DiBuilder();
+            DiBuilder();
 
             var wordPrinter = new WordPrinter();
 
@@ -25,7 +25,7 @@ namespace ConsoleDictionary
                     break;
                 }
 
-                IWordCardProvider wordCardProvider = di.Release<IWordCardProvider>();
+                IWordCardProvider wordCardProvider = DI.DIContainer.instance.Release<IWordCardProvider>();
                 var wordCard = wordCardProvider.GetWordCard(word);
 
                 wordPrinter.Print(wordCard);
@@ -33,11 +33,10 @@ namespace ConsoleDictionary
             } while (true);
         }
 
-        private static DI.DIContainer DiBuilder()
+        private static void DiBuilder()
         {
-            var di = new DI.DIContainer();
-            di.Register(typeof(IWordCardProvider), new WordCardFreeApi());
-            return di;
+            DI.DIContainer.instance.Register(typeof(IWordCardProvider), new WordCardFreeApi());
+            DI.DIContainer.instance.Register(typeof(IWebClient), new MyHttpClient());
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ConsoleDictionary.FreeDict
 {
     public class FreeDictionaryApi
     {
-        public List<WordObject> GetWordObject(string query)
+        internal List<WordObject> GetWordObject(string query)
         {
             string url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + query;
 
