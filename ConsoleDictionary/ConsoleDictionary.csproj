@@ -48,6 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DI\DIContainer.cs" />
+    <Compile Include="FreeDict\WordCardFreeApi.cs" />
+    <Compile Include="IWordCardProvider.cs" />
+    <Compile Include="SomeDict\SomeDictApi.cs" />
     <Compile Include="StringDownloader.cs" />
     <Compile Include="FreeDict\FreeDictApi.cs" />
     <Compile Include="FreeDict\Model\Definitions.cs" />

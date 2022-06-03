@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleDictionary.FreeDict;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +12,32 @@ namespace ConsoleDictionary
     {
         internal static void Main()
         {
+            DI.DIContainer di = DiBuilder();
+
             var wordPrinter = new WordPrinter();
 
             do
             {
                 Console.Write("Enter a word: ");
-                string searchQuery = Console.ReadLine();
-                if (searchQuery == "EXIT")
+                string word = Console.ReadLine();
+                if (word == "EXIT")
                 {
                     break;
                 }
 
-                WordCard wordCard = new WordCard().FormWordCard(searchQuery);
+                IWordCardProvider wordCardProvider = di.Release<IWordCardProvider>();
+                var wordCard = wordCardProvider.GetWordCard(word);
 
-                var dict = wordCard.Definitions;
                 wordPrinter.Print(wordCard);
 
             } while (true);
+        }
+
+        private static DI.DIContainer DiBuilder()
+        {
+            var di = new DI.DIContainer();
+            di.Register(typeof(IWordCardProvider), new WordCardFreeApi());
+            return di;
         }
     }
 }
