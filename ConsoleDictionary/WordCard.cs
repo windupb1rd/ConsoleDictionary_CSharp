@@ -32,6 +32,11 @@ namespace ConsoleDictionary
             Synonyms  = new Dictionary<string, List<string>>();
         }
 
+        public delegate void PrintDelegate(WordCard wordCardObj);
+
+        public event PrintDelegate OnGetWord;
+        
+
         /// <summary>
         /// Метод формирует единую объект слова на основе данных из разных API
         /// </summary>
@@ -39,7 +44,7 @@ namespace ConsoleDictionary
         /// <returns></returns>
         public WordCard FormWordCard(string searchQuery)
         {
-            var freeDictApiWordObj = freeDictionaryApi.GetWordObject(searchQuery);
+            var freeDictApiWordObj = (new FreeDictionaryApi()).GetWordObject(searchQuery);
 
             Word = freeDictApiWordObj[0].Word;
 
@@ -80,6 +85,7 @@ namespace ConsoleDictionary
                 }
             }
 
+            OnGetWord(this);  // запуск события
             return this;
         }
     }
