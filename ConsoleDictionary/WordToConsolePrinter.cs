@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleDictionary
 {
-    internal class WordPrinter
+    public class WordToConsolePrinter
     {
         public void Print(WordCard wordCard)
         {

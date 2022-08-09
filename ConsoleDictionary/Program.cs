@@ -11,7 +11,7 @@ namespace ConsoleDictionary
     {
         internal static void Main()
         {
-            //var wordPrinter = new WordPrinter();
+            //var wordPrinter = new WordToConsolePrinter();
 
             do
             {
@@ -23,7 +23,7 @@ namespace ConsoleDictionary
                 }
 
                 WordCard wordCard = new WordCard();
-                wordCard.OnGetWord += new WordCard.PrintDelegate((new WordPrinter()).Print);
+                wordCard.GetWord += new WordCard.PrintDelegate((new WordToConsolePrinter()).Print);
                 wordCard.FormWordCard(searchQuery);
 
                 //var dict = wordCard.Definitions;

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ConsoleDictionary
 {
-    internal class WordCard
+    public class WordCard
     {
         private readonly FreeDictionaryApi freeDictionaryApi = new FreeDictionaryApi();
 
@@ -34,7 +34,7 @@ namespace ConsoleDictionary
 
         public delegate void PrintDelegate(WordCard wordCardObj);
 
-        public event PrintDelegate OnGetWord;
+        public event PrintDelegate GetWord;
         
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace ConsoleDictionary
                 }
             }
 
-            OnGetWord(this);  // запуск события
+            GetWord(this);  // запуск события
             return this;
         }
     }
