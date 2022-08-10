@@ -27,7 +27,7 @@ namespace ConsoleDictionary
         //internal string[] Translations { get; set; }  // доделать
         //internal string[] ReversoExamples { get; set; }  // доделать
 
-        internal WordCard()
+        public WordCard()
         {
             Synonyms = new Dictionary<string, List<string>>();
             freeDictionaryApiObj = new FreeDictionaryApi();

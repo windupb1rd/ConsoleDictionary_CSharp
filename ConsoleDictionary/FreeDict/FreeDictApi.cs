@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleDictionary.FreeDict
 {
-    public class FreeDictionaryApi
+    internal class FreeDictionaryApi
     {
         public List<WordObject> GetWordObject(string query)
         {

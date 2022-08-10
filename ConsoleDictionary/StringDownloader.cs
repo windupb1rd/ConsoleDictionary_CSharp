@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace ConsoleDictionary
 {
-    public class StringDownloader
+    internal class StringDownloader
     {
         public string GetString(string url)
         {
