@@ -6,7 +6,7 @@ namespace ConsoleDictionary
 {
     public class WordCard
     {
-        private readonly FreeDictionaryApi freeDictionaryApi = new FreeDictionaryApi();
+        private readonly FreeDictionaryApi freeDictionaryApiObj;
 
         internal string Word { get; private set; }
 
@@ -29,13 +29,14 @@ namespace ConsoleDictionary
 
         internal WordCard()
         {
-            Synonyms  = new Dictionary<string, List<string>>();
+            Synonyms = new Dictionary<string, List<string>>();
+            freeDictionaryApiObj = new FreeDictionaryApi();
         }
 
         public delegate void PrintDelegate(WordCard wordCardObj);
 
-        public event PrintDelegate GetWord;
-        
+        public event PrintDelegate GetWordDelegate;
+
 
         /// <summary>
         /// Метод формирует единую объект слова на основе данных из разных API
@@ -44,50 +45,55 @@ namespace ConsoleDictionary
         /// <returns></returns>
         public WordCard FormWordCard(string searchQuery)
         {
-            var freeDictApiWordObj = (new FreeDictionaryApi()).GetWordObject(searchQuery);
+            var wordObj = freeDictionaryApiObj.GetWordObject(searchQuery);
 
-            Word = freeDictApiWordObj[0].Word;
-
-            if (freeDictApiWordObj[0].Phonetic != null)
+            if (wordObj != null)
             {
-                Pronunciation = freeDictApiWordObj[0].Phonetic;
-            }
-            else
-            {
-                Pronunciation = "No phonetic";  // заглушка
-            }
+                Word = wordObj[0].Word;
 
-            for (int i = 0; i < freeDictApiWordObj[0].Meanings.Count; i++)
-            {
-                string partOfSpeech = freeDictApiWordObj[0].Meanings[i].PartOfSpeech;
-
-                // Add synonym per part of speech
-                if (!_definition.ContainsKey(partOfSpeech))
+                if (wordObj[0].Phonetic != null)
                 {
-                    Synonyms.Add(partOfSpeech, freeDictApiWordObj[0].Meanings[i].Synonyms);
+                    Pronunciation = wordObj[0].Phonetic;
                 }
                 else
                 {
-                    Synonyms[partOfSpeech].AddRange(freeDictApiWordObj[0].Meanings[i].Synonyms);
+                    Pronunciation = "No phonetic";  // заглушка
                 }
 
-                // Add defenitions per part of speech
-                if (!_definition.ContainsKey(partOfSpeech))
+                for (int i = 0; i < wordObj[0].Meanings.Count; i++)
                 {
-                    _definition.Add(partOfSpeech, new List<string>());
+                    string partOfSpeech = wordObj[0].Meanings[i].PartOfSpeech;
+
+                    // Add synonym per part of speech
+                    if (!_definition.ContainsKey(partOfSpeech))
+                    {
+                        Synonyms.Add(partOfSpeech, wordObj[0].Meanings[i].Synonyms);
+                    }
+                    else
+                    {
+                        Synonyms[partOfSpeech].AddRange(wordObj[0].Meanings[i].Synonyms);
+                    }
+
+                    // Add defenitions per part of speech
+                    if (!_definition.ContainsKey(partOfSpeech))
+                    {
+                        _definition.Add(partOfSpeech, new List<string>());
+                    }
+                    for (int j = 0; j < wordObj[0].Meanings[i].Definitions.Count; j++)
+                    {
+                        _definition[partOfSpeech]
+                                .Add($@"{wordObj[0]
+                                    .Meanings[i].Definitions[j].Definition}\n\t/{wordObj[0]
+                                    .Meanings[i].Definitions[j].Example ?? "No example"}/ ");
+                    }
                 }
-                for (int j = 0; j < freeDictApiWordObj[0].Meanings[i].Definitions.Count; j++)
-                {
-                    _definition[partOfSpeech]
-                            .Add($@"{freeDictApiWordObj[0]
-                                .Meanings[i].Definitions[j].Definition}\n\t/{freeDictApiWordObj[0]
-                                .Meanings[i].Definitions[j].Example ?? "No example"}/ ");
-                }
+                return this;
             }
-
-            GetWord(this);  // запуск события
-            return this;
+            else
+            {
+                return null;
+            }
+            
         }
     }
-
 }

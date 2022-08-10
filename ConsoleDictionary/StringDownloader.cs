@@ -26,7 +26,6 @@ namespace ConsoleDictionary
             catch (WebException)
             {
                 Console.WriteLine("I couldn't find the word. Check you query for typos or try looking for another word.");
-                Program.Main();
 
                 return null;
             }

@@ -23,7 +23,6 @@ namespace ConsoleDictionary
                 }
 
                 WordCard wordCard = new WordCard();
-                wordCard.GetWord += new WordCard.PrintDelegate((new WordToConsolePrinter()).Print);
                 wordCard.FormWordCard(searchQuery);
 
                 //var dict = wordCard.Definitions;
