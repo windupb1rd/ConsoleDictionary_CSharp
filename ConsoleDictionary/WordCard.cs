@@ -83,7 +83,7 @@ namespace ConsoleDictionary
                     {
                         _definition[partOfSpeech]
                                 .Add($@"{wordObj[0]
-                                    .Meanings[i].Definitions[j].Definition}\n\t/{wordObj[0]
+                                    .Meanings[i].Definitions[j].Definition}{"\n\t"}/{wordObj[0]
                                     .Meanings[i].Definitions[j].Example ?? "No example"}/ ");
                     }
                 }
