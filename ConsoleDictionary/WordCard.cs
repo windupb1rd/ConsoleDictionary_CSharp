@@ -8,13 +8,13 @@ namespace ConsoleDictionary
     {
         private readonly FreeDictionaryApi freeDictionaryApiObj;
 
-        internal string Word { get; private set; }
+        public string Word { get; private set; }
 
-        internal string Pronunciation { get; private set; }
+        public string Pronunciation { get; private set; }
 
-        private readonly Dictionary<string, List<string>> _definition = new Dictionary<string, List<string>>();
+        public readonly Dictionary<string, List<string>> _definition = new Dictionary<string, List<string>>();
 
-        internal Dictionary<string, List<string>> Definitions
+        public Dictionary<string, List<string>> Definitions
         {
             get
             {
@@ -83,7 +83,7 @@ namespace ConsoleDictionary
                     {
                         _definition[partOfSpeech]
                                 .Add($@"{wordObj[0]
-                                    .Meanings[i].Definitions[j].Definition}\n\t/{wordObj[0]
+                                    .Meanings[i].Definitions[j].Definition}{"\n\t"}/{wordObj[0]
                                     .Meanings[i].Definitions[j].Example ?? "No example"}/ ");
                     }
                 }
